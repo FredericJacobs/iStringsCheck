@@ -1,0 +1,15 @@
+[package]
+name = "iStringsCheck"
+version = "0.1.0"
+authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
+description = "iStringsCheck is an utility to verify completeness of .strings (iOS & OS X) translations files and the count of their format attributes."
+homepage = "https://github.com/FredericJacobs/iStringsCheck"
+repository = "https://github.com/FredericJacobs/iStringsCheck"
+readme = "README.md"
+keywords = [".strings", "strings", "OSX", "iOS", "translations"]
+license = "MIT"
+
+[dependencies]
+docopt = "*"
+rustc-serialize = "*"
+regex = "*"
