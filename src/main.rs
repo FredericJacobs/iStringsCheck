@@ -15,7 +15,7 @@ use std::process::Command;
 
 // Write the Docopt usage string.
 static USAGE: &'static str = "
-Usage: istringscheck <source_strings> <translations_dir>
+Usage: istringscheck <source> <translations>
 Options:
     -h, --help  Displays this message.
 ";
@@ -23,7 +23,7 @@ Options:
 #[derive(Debug, RustcDecodable)]
 struct Args {
     arg_source: String,
-    arg_dir: String,
+    arg_translations: String,
 }
 
 fn main() {
@@ -33,7 +33,7 @@ fn main() {
     validate_args(&args);
     let source_strings = hashmap_from_source(args.arg_source);
 
-    for language_file in language_files_from_dir(&args.arg_dir).iter() {
+    for language_file in language_files_from_dir(&args.arg_translations).iter() {
         println!( "Parsing language file {}", language_file.display());
 
         let translated_strings = hashmap_from_source(language_file.to_str().unwrap().to_string());
@@ -132,7 +132,7 @@ fn is_folder(path :PathBuf) -> bool {
 // Validates the arguments, checking file and folder exists.
 fn validate_args(args: &Args) {
     let source_path = path_from_string(&args.arg_source);
-    let dir_path    = path_from_string(&args.arg_dir);
+    let dir_path    = path_from_string(&args.arg_translations);
 
     let source_exists = is_file(source_path);
     let dir_exists    = is_folder(dir_path);
